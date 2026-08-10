@@ -1,0 +1,11 @@
+#Qt 编译临时文件
+build-*/
+*.pro.user
+*.autosave
+*.o
+*.exe
+#编译输出目录
+debug/
+release/
+#Qt Creator 本地配置
+.qtcreator/
