@@ -18,7 +18,10 @@ public:
     ~MainWindow() override;
 
 private slots:
-    //void on_pushButton_clicked();
+
+    void on_btn_login_clicked();
+
+    void on_btn_register_clicked();
 
 private:
     Ui::MainWindow *ui;
