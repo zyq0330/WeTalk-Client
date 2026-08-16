@@ -310,6 +310,7 @@ Makefile: ../../WeTalk-Client.pro ../../../../6.11.0/mingw_64/mkspecs/features/s
 		../../WeTalk-Client.pro \
 		../../../../6.11.0/mingw_64/lib/Qt6Widgets.prl \
 		../../../../6.11.0/mingw_64/lib/Qt6Gui.prl \
+		../../../../6.11.0/mingw_64/lib/Qt6Network.prl \
 		../../../../6.11.0/mingw_64/lib/Qt6Core.prl \
 		../../../../6.11.0/mingw_64/lib/Qt6EntryPoint.prl \
 		../../../../6.11.0/mingw_64/mkspecs/features/build_pass.prf
@@ -554,6 +555,7 @@ Makefile: ../../WeTalk-Client.pro ../../../../6.11.0/mingw_64/mkspecs/features/s
 ../../WeTalk-Client.pro:
 ../../../../6.11.0/mingw_64/lib/Qt6Widgets.prl:
 ../../../../6.11.0/mingw_64/lib/Qt6Gui.prl:
+../../../../6.11.0/mingw_64/lib/Qt6Network.prl:
 ../../../../6.11.0/mingw_64/lib/Qt6Core.prl:
 ../../../../6.11.0/mingw_64/lib/Qt6EntryPoint.prl:
 ../../../../6.11.0/mingw_64/mkspecs/features/build_pass.prf:

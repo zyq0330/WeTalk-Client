@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include <QString>
 #include <QListWidgetItem>
-
+#include "tcpclient.h"
 namespace Ui {
 class ChatWindow;
 }
@@ -14,7 +14,7 @@ class ChatWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ChatWindow(QWidget *parent = nullptr);
+    explicit ChatWindow(TcpClient *client,QWidget *parent = nullptr);
     ~ChatWindow();
     void appendMessage(const QString &text, Qt::Alignment alignment, const QColor &color);
 private slots:
@@ -25,6 +25,7 @@ private slots:
 private:
     Ui::ChatWindow *ui;
     QString currentFriend;
+    TcpClient *tcpClient;
 };
 
 #endif // CHATWINDOW_H

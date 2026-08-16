@@ -1,8 +1,8 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
 #include <QTimer>
-ChatWindow::ChatWindow(QWidget *parent)
-    : QMainWindow(parent)
+ChatWindow::ChatWindow(TcpClient *client,QWidget *parent)
+    : QMainWindow(parent),tcpClient(client)
     , ui(new Ui::ChatWindow)
 {
     ui->setupUi(this);

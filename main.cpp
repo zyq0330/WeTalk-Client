@@ -1,11 +1,11 @@
-#include "LoginWindow.h"
+#include "MainWindow.h"
 #include "chatwindow.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    ChatWindow w;
+    MainWindow w;
     w.show();
     return a.exec();
 }
