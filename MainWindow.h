@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "tcpclient.h"
 #include "chatwindow.h"
+#include "registerdialog.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -24,9 +25,18 @@ private slots:
     void onLoginSuccess();
     void onLoginFailed(const QString& reason);
     void onTcpError(const QString& err);
+    void onRegisterRequest(const QString& username,const QString& password,const QString& nickname);
+    void sendRegisterPacket(const QString& username,const QString& password,const QString& nickname);
+    void onTcpConnected();
 private:
     Ui::MainWindow *ui;
     TcpClient *tcpClient;
     ChatWindow *chatWindow;
+    bool isRegisterPending=false;
+    QString pendingUsername;
+    QString pendingPassword;
+    QString pendingNickname;
+    QString currentUsername;
+    QString currentPassword;
 };
 #endif // MAINWINDOW_H

@@ -1,5 +1,5 @@
 /********************************************************************************
-** Form generated from reading UI file 'mainwindow.ui'
+** Form generated from reading UI file 'MainWindow.ui'
 **
 ** Created by: Qt User Interface Compiler version 6.11.0
 **
@@ -24,7 +24,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QLineEdit *lineEdit_username;
     QSpacerItem *verticalSpacer;
@@ -49,13 +49,13 @@ public:
         MainWindow->setToolTipDuration(-1);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        widget = new QWidget(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(12, 12, 169, 270));
-        verticalLayout = new QVBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(390, 100, 251, 361));
+        verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setObjectName("verticalLayout");
         verticalLayout->setContentsMargins(0, 0, 0, 0);
-        lineEdit_username = new QLineEdit(widget);
+        lineEdit_username = new QLineEdit(layoutWidget);
         lineEdit_username->setObjectName("lineEdit_username");
 
         verticalLayout->addWidget(lineEdit_username);
@@ -64,7 +64,7 @@ public:
 
         verticalLayout->addItem(verticalSpacer);
 
-        lineEdit_password = new QLineEdit(widget);
+        lineEdit_password = new QLineEdit(layoutWidget);
         lineEdit_password->setObjectName("lineEdit_password");
         lineEdit_password->setEchoMode(QLineEdit::EchoMode::Password);
 
@@ -74,7 +74,7 @@ public:
 
         verticalLayout->addItem(verticalSpacer_2);
 
-        btn_login = new QPushButton(widget);
+        btn_login = new QPushButton(layoutWidget);
         btn_login->setObjectName("btn_login");
 
         verticalLayout->addWidget(btn_login);
@@ -83,7 +83,7 @@ public:
 
         verticalLayout->addItem(verticalSpacer_3);
 
-        btn_register = new QPushButton(widget);
+        btn_register = new QPushButton(layoutWidget);
         btn_register->setObjectName("btn_register");
 
         verticalLayout->addWidget(btn_register);

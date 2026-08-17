@@ -35,13 +35,13 @@
    <number>-1</number>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>12</x>
-      <y>12</y>
-      <width>169</width>
-      <height>270</height>
+      <x>390</x>
+      <y>100</y>
+      <width>251</width>
+      <height>361</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">

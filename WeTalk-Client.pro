@@ -10,16 +10,19 @@ SOURCES += \
     MainWindow.cpp \
     chatwindow.cpp \
     main.cpp \
+    registerdialog.cpp \
     tcpclient.cpp
 
 HEADERS += \
     MainWindow.h \
     chatwindow.h \
+    registerdialog.h \
     tcpclient.h
 
 FORMS += \
     MainWindow.ui \
-    chatwindow.ui
+    chatwindow.ui \
+    registerdialog.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
