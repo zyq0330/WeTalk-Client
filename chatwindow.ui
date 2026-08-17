@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -91,7 +91,7 @@
           </rect>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>发送</string>
          </property>
         </widget>
        </widget>

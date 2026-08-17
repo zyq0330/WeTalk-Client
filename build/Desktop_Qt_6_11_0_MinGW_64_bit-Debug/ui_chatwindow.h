@@ -29,7 +29,7 @@ class Ui_ChatWindow
 {
 public:
     QWidget *centralwidget;
-    QWidget *widget;
+    QWidget *layoutWidget;
     QHBoxLayout *horizontalLayout;
     QListWidget *listWidget;
     QStackedWidget *stackedWidget;
@@ -49,20 +49,20 @@ public:
         ChatWindow->resize(1187, 714);
         centralwidget = new QWidget(ChatWindow);
         centralwidget->setObjectName("centralwidget");
-        widget = new QWidget(centralwidget);
-        widget->setObjectName("widget");
-        widget->setGeometry(QRect(0, 0, 641, 641));
-        horizontalLayout = new QHBoxLayout(widget);
+        layoutWidget = new QWidget(centralwidget);
+        layoutWidget->setObjectName("layoutWidget");
+        layoutWidget->setGeometry(QRect(0, 0, 641, 641));
+        horizontalLayout = new QHBoxLayout(layoutWidget);
         horizontalLayout->setObjectName("horizontalLayout");
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        listWidget = new QListWidget(widget);
+        listWidget = new QListWidget(layoutWidget);
         listWidget->setObjectName("listWidget");
         listWidget->setMinimumSize(QSize(200, 0));
         listWidget->setMaximumSize(QSize(200, 16777215));
 
         horizontalLayout->addWidget(listWidget);
 
-        stackedWidget = new QStackedWidget(widget);
+        stackedWidget = new QStackedWidget(layoutWidget);
         stackedWidget->setObjectName("stackedWidget");
         page = new QWidget();
         page->setObjectName("page");
@@ -106,7 +106,7 @@ public:
     {
         ChatWindow->setWindowTitle(QCoreApplication::translate("ChatWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("ChatWindow", "\346\254\242\350\277\216\344\275\277\347\224\250WeTalk-Client", nullptr));
-        btn_send->setText(QCoreApplication::translate("ChatWindow", "PushButton", nullptr));
+        btn_send->setText(QCoreApplication::translate("ChatWindow", "\345\217\221\351\200\201", nullptr));
     } // retranslateUi
 
 };

@@ -1,14 +1,30 @@
 #include "chatwindow.h"
 #include "ui_chatwindow.h"
+#include "tcpclient.h"
 #include <QTimer>
+#include <QMessageBox>
+#include <QJsonObject>
 ChatWindow::ChatWindow(TcpClient *client,QWidget *parent)
-    : QMainWindow(parent),tcpClient(client)
-    , ui(new Ui::ChatWindow)
+    : QMainWindow(parent), ui(new Ui::ChatWindow),tcpClient(client)
 {
     ui->setupUi(this);
-    ui->listWidget->addItem("张三");
-    ui->listWidget->addItem("李四");
-    ui->listWidget->addItem("王五");
+    ui->listWidget->addItem("alice");
+    ui->listWidget->addItem("bob");
+    //ui->listWidget->addItem("王五");
+    connect(tcpClient,&TcpClient::messageReceived,this,[=](uint16_t cmd,const QByteArray& body){
+        if(cmd==302){
+            QJsonDocument doc=QJsonDocument::fromJson(body);
+            if(!doc.isObject())
+                return;
+            QJsonObject obj=doc.object();
+            QString from=obj.value("from").toString();
+            QString content=obj.value("content").toString();
+            appendMessage(from+":"+content,Qt::AlignLeft,Qt::gray);
+            if(from!=currentFriend){
+                qDebug()<<"收到来自"<<from<<"的消息，但当前聊天对象是"<<currentFriend;
+            }
+        }
+    });
 }
 
 ChatWindow::~ChatWindow()
@@ -35,13 +51,19 @@ void ChatWindow::appendMessage(const QString& text,Qt::Alignment alignment,const
 void ChatWindow::on_btn_send_clicked()
 {
     QString msg=ui->textEdit_input->toPlainText().trimmed();
-    if(msg.isEmpty())  return;
-    appendMessage("我:"+msg,Qt::AlignRight,Qt::blue);
+    if(msg.isEmpty()){
+        return;
+    }
+    if(currentFriend.isEmpty()){
+        QMessageBox::warning(this,"提示","请先选择好友");
+        return;
+    }
+    QJsonObject obj;
+    obj["target"]=currentFriend;
+    obj["content"]=msg;
+    QByteArray body=QJsonDocument(obj).toJson();
+    tcpClient->sendMessage(301,body);
+    appendMessage("我："+msg,Qt::AlignRight,Qt::blue);
     ui->textEdit_input->clear();
-    QTimer::singleShot(1000,[=](){
-        if(!currentFriend.isEmpty()){
-            appendMessage(currentFriend+":自动回复",Qt::AlignLeft,Qt::gray);
-        }
-    });
 }
 
