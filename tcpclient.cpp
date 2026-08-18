@@ -7,6 +7,10 @@ TcpClient::TcpClient(QObject* parent):QObject(parent){
     connect(socket,&QTcpSocket::readyRead,this,&TcpClient::onReadyRead);
     connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred),
             this,&TcpClient::onError);
+    heartbeatTimer=new QTimer(this);
+    heartbeatTimer->setInterval(15000);
+    connect(heartbeatTimer,&QTimer::timeout,this,&TcpClient::sendHeartbeat);
+    heartbeatMissCount=0;
 }
 TcpClient::~TcpClient(){
     disconnect();
@@ -56,9 +60,11 @@ bool TcpClient::unpackMessage(const QByteArray& raw,uint16_t& cmd,QByteArray& bo
     return true;
 }
 void TcpClient::onConnected(){
+    heartbeatTimer->start();
     emit connected();
 }
 void TcpClient::onDisconnected(){
+    heartbeatTimer->stop();
     emit disconnected();
 }
 void TcpClient::onError(QAbstractSocket::SocketError err){
@@ -74,8 +80,23 @@ void TcpClient::onReadyRead(){
         if(!ok){
             break;
         }
+        if(cmd==402){
+            heartbeatMissCount=0;
+        }else{
         emit messageReceived(cmd,body);
+        }
         buffer.remove(0,4+2+body.size());
+    }
+}
+void TcpClient::sendHeartbeat(){
+    if(!isConnected()){
+        return;
+    }
+    sendMessage(401,QByteArray());
+    heartbeatMissCount++;
+    if(heartbeatMissCount>=3){
+        emit errorOccurred("心跳超时，连接断开");
+        disconnect();
     }
 }
 

@@ -3,6 +3,7 @@
 #include <QTcpSocket>
 #include <QObject>
 #include <QByteArray>
+#include <QTimer>
 class TcpClient : public QObject
 {
         Q_OBJECT
@@ -24,11 +25,14 @@ private slots:
     void onConnected();
     void onDisconnected();
     void onError(QAbstractSocket::SocketError err);
+    void sendHeartbeat();
 private:
     QTcpSocket *socket;
     QByteArray buffer;
     QByteArray packMessage(uint16_t cmd,const QByteArray& body);
     bool unpackMessage(const QByteArray& raw,uint16_t& cmd,QByteArray& body);
+    QTimer* heartbeatTimer;
+    int heartbeatMissCount;
 };
 
 #endif // TCPCLIENT_H

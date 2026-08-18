@@ -34,7 +34,20 @@ MainWindow::MainWindow(QWidget *parent)
             }
         }
     });
-    connect(tcpClient,&TcpClient::errorOccurred,this,&MainWindow::onTcpError);
+    connect(tcpClient,&TcpClient::errorOccurred,this,[=](const QString& err){
+        if(err.contains("remote host closed")||err.contains("连接被远程主机关闭")){
+            return;
+        }
+            QMessageBox::critical(this,"网络错误",err);
+    });
+    connect(tcpClient,&TcpClient::disconnected,this,[=](){
+        QMessageBox::warning(this,"提示","与服务器断开连接，请重新登录!");
+        if(chatWindow){
+            chatWindow->close();
+            chatWindow=nullptr;
+        }
+        this->show();
+    });
 }
 MainWindow::~MainWindow()
 {
