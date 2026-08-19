@@ -73,7 +73,7 @@ void MainWindow::on_btn_register_clicked()
     regDlg->exec();
 }
 void MainWindow::onLoginSuccess(){
-    chatWindow=new ChatWindow(tcpClient,this);
+    chatWindow=new ChatWindow(this,tcpClient);
     chatWindow->show();
     this->hide();
 }

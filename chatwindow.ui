@@ -1,116 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ChatWindow</class>
- <widget class="QMainWindow" name="ChatWindow">
+ <widget class="ChatWindow" name="ChatWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1187</width>
-    <height>714</height>
+    <width>976</width>
+    <height>604</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="layoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>641</width>
-      <height>641</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QListWidget" name="listWidget">
-       <property name="minimumSize">
-        <size>
-         <width>200</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>200</width>
-         <height>16777215</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QStackedWidget" name="stackedWidget">
-       <property name="currentIndex">
-        <number>1</number>
-       </property>
-       <widget class="QWidget" name="page">
-        <widget class="QLabel" name="label">
-         <property name="geometry">
-          <rect>
-           <x>110</x>
-           <y>270</y>
-           <width>181</width>
-           <height>51</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>欢迎使用WeTalk-Client</string>
-         </property>
-        </widget>
-       </widget>
-       <widget class="QWidget" name="page_2">
-        <widget class="QTextBrowser" name="textBrowser_chat">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>411</width>
-           <height>461</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QTextEdit" name="textEdit_input">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>484</y>
-           <width>411</width>
-           <height>91</height>
-          </rect>
-         </property>
-        </widget>
-        <widget class="QPushButton" name="btn_send">
-         <property name="geometry">
-          <rect>
-           <x>310</x>
-           <y>610</y>
-           <width>93</width>
-           <height>28</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>发送</string>
-         </property>
-        </widget>
-       </widget>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1187</width>
-     <height>25</height>
+     <x>50</x>
+     <y>40</y>
+     <width>591</width>
+     <height>521</height>
     </rect>
    </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QListWidget" name="listWidget">
+      <property name="minimumSize">
+       <size>
+        <width>200</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="page">
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>190</y>
+          <width>151</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>欢迎使用WeTalk</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="page_2">
+       <widget class="QTextBrowser" name="textBrowser_chat">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>381</width>
+          <height>301</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QTextEdit" name="textEdit_input">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>320</y>
+          <width>381</width>
+          <height>121</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_send">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>470</y>
+          <width>93</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>发送</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
