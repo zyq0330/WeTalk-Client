@@ -1,42 +1,44 @@
 #include "tcpclient.h"
 #include <QDataStream>
 TcpClient::TcpClient(QObject* parent):QObject(parent){
-    socket=new QTcpSocket(this);
-    connect(socket,&QTcpSocket::connected,this,&TcpClient::onConnected);
-    connect(socket,&QTcpSocket::disconnected,this,&TcpClient::onDisconnected);
-    connect(socket,&QTcpSocket::readyRead,this,&TcpClient::onReadyRead);
-    connect(socket,QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred),
+    socket_=new QTcpSocket(this);
+    connect(socket_,&QTcpSocket::connected,this,&TcpClient::onConnected);
+    connect(socket_,&QTcpSocket::disconnected,this,&TcpClient::onDisconnected);
+    connect(socket_,&QTcpSocket::readyRead,this,&TcpClient::onReadyRead);
+    connect(socket_,QOverload<QAbstractSocket::SocketError>::of(&QTcpSocket::errorOccurred),
             this,&TcpClient::onError);
     heartbeatTimer=new QTimer(this);
     heartbeatTimer->setInterval(15000);
     connect(heartbeatTimer,&QTimer::timeout,this,&TcpClient::sendHeartbeat);
-    heartbeatMissCount=0;
+    heartbeatMissCount_=0;
 }
 TcpClient::~TcpClient(){
     disconnect();
 }
+//连接到指定服务器，ip（服务器ip地址），（port)服务器端口
 void TcpClient::connectToServer(const QString& ip,quint16 port){
-    if(socket->state()==QAbstractSocket::ConnectedState){
+    if(socket_->state()==QAbstractSocket::ConnectedState){
         emit errorOccurred("Already connected");
         return;
     }
-    socket->connectToHost(ip,port);
+    socket_->connectToHost(ip,port);
 }
 void TcpClient::disconnect(){
-    if(socket->state()!=QAbstractSocket::UnconnectedState){
-        socket->disconnectFromHost();
+    if(socket_->state()!=QAbstractSocket::UnconnectedState){
+        socket_->disconnectFromHost();
     }
 }
 bool TcpClient::isConnected() const{
-    return socket->state()==QAbstractSocket::ConnectedState;
+    return socket_->state()==QAbstractSocket::ConnectedState;
 }
+//发送消息，cmd命令码，body消息包体，json格式
 void TcpClient::sendMessage(uint16_t cmd,const QByteArray& body){
     if(!isConnected()){
         emit errorOccurred("Not connected");
         return;
     }
     QByteArray packet=packMessage(cmd,body);
-    socket->write(packet);
+    socket_->write(packet);
 }
 QByteArray TcpClient::packMessage(uint16_t cmd,const QByteArray& body){
     QByteArray data;
@@ -69,23 +71,23 @@ void TcpClient::onDisconnected(){
 }
 void TcpClient::onError(QAbstractSocket::SocketError err){
     Q_UNUSED(err);
-    emit errorOccurred(socket->errorString());
+    emit errorOccurred(socket_->errorString());
 }
 void TcpClient::onReadyRead(){
-    buffer.append(socket->readAll());
+    buffer_.append(socket_->readAll());
     while(true){
         uint16_t cmd;
         QByteArray body;
-        bool ok=unpackMessage(buffer,cmd,body);
+        bool ok=unpackMessage(buffer_,cmd,body);
         if(!ok){
             break;
         }
         if(cmd==402){
-            heartbeatMissCount=0;
+            heartbeatMissCount_=0;
         }else{
         emit messageReceived(cmd,body);
         }
-        buffer.remove(0,4+2+body.size());
+        buffer_.remove(0,4+2+body.size());
     }
 }
 void TcpClient::sendHeartbeat(){
@@ -93,8 +95,8 @@ void TcpClient::sendHeartbeat(){
         return;
     }
     sendMessage(401,QByteArray());
-    heartbeatMissCount++;
-    if(heartbeatMissCount>=3){
+    heartbeatMissCount_++;
+    if(heartbeatMissCount_>=3){
         emit errorOccurred("心跳超时，连接断开");
         disconnect();
     }

@@ -27,12 +27,12 @@ private slots:
     void onError(QAbstractSocket::SocketError err);
     void sendHeartbeat();
 private:
-    QTcpSocket *socket;
-    QByteArray buffer;
+    QTcpSocket *socket_;
+    QByteArray buffer_;
     QByteArray packMessage(uint16_t cmd,const QByteArray& body);
     bool unpackMessage(const QByteArray& raw,uint16_t& cmd,QByteArray& body);
     QTimer* heartbeatTimer;
-    int heartbeatMissCount;
+    int heartbeatMissCount_;
 };
 
 #endif // TCPCLIENT_H

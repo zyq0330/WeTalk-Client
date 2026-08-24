@@ -25,9 +25,9 @@ private slots:
 
 private:
     Ui::ChatWindow *ui;
-    QString currentFriend;
+    QString currentFriend_;
     TcpClient *tcpClient;
-    QMap<QString,bool> unreadMap;
+    QMap<QString,bool> unreadMap_;
 };
 
 #endif // CHATWINDOW_H
